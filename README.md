@@ -1,3 +1,3 @@
-# @praha/react-use
+# @praha/react-kit
 
-Collection of React Hooks
+Collection of React Hooks and Utilities.

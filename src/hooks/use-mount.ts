@@ -18,7 +18,7 @@ import type { EffectCallback } from 'react';
  * @example
  * Basic usage without cleanup:
  * ```tsx
- * import { useMount } from '@praha/react-use';
+ * import { useMount } from '@praha/react-kit';
  * import type { FC } from 'react';
  *
  * const Component: FC () => {
@@ -33,7 +33,7 @@ import type { EffectCallback } from 'react';
  * @example
  * Usage with cleanup function:
  * ```tsx
- * import { useMount } from '@praha/react-use';
+ * import { useMount } from '@praha/react-kit';
  * import type { FC } from 'react';
  *
  * const Component: FC () => {
