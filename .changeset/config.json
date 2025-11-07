@@ -3,7 +3,7 @@
   "changelog": [
     "@changesets/changelog-github",
     {
-      "repo": "praha-inc/react-use"
+      "repo": "praha-inc/react-kit"
     }
   ],
   "commit": false,

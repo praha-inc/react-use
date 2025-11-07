@@ -1,20 +1,20 @@
 {
-  "name": "@praha/react-use",
+  "name": "@praha/react-kit",
   "version": "0.0.1",
-  "description": "Collection of React Hooks",
+  "description": "Collection of React Hooks and Utilities.",
   "keywords": [
     "javascript",
     "typescript",
     "react",
     "hooks"
   ],
-  "homepage": "https://github.com/praha-inc/react-use/blob/main/README.md",
+  "homepage": "https://github.com/praha-inc/react-kit/blob/main/README.md",
   "bugs": {
-    "url": "https://github.com/praha-inc/react-use/issues"
+    "url": "https://github.com/praha-inc/react-kit/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/praha-inc/react-use.git"
+    "url": "git+https://github.com/praha-inc/react-kit.git"
   },
   "license": "MIT",
   "author": "PrAha, Inc.",
