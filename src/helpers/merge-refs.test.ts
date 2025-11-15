@@ -34,4 +34,51 @@ describe('mergeRefs', () => {
     expect(ref1.current).toBe(value);
     expect(ref2).toHaveBeenCalledWith(value);
   });
+
+  it('should return cleanup function', () => {
+    const ref = { current: null };
+    const mergedRef = mergeRefs<string | null>(ref);
+
+    const cleanup = mergedRef('value');
+
+    expect(typeof cleanup).toBe('function');
+  });
+
+  it('should set ref to null when cleanup is called', () => {
+    const ref = { current: null };
+    const mergedRef = mergeRefs<string | null>(ref);
+
+    const cleanup = mergedRef('value') as () => void;
+    expect(ref.current).not.toBeNull();
+
+    cleanup();
+    expect(ref.current).toBeNull();
+  });
+
+  it('should call cleanup function returned from callback ref', () => {
+    const cleanupFn = vi.fn();
+    const callbackRef = vi.fn(() => cleanupFn);
+    const mergedRef = mergeRefs<string>(callbackRef);
+
+    const cleanup = mergedRef('value') as () => void;
+    expect(cleanupFn).not.toHaveBeenCalled();
+
+    cleanup();
+    expect(cleanupFn).toHaveBeenCalled();
+  });
+
+  it('should handle cleanup for multiple refs', () => {
+    const ref1 = { current: null };
+    const ref2CleanupFn = vi.fn();
+    const ref2 = vi.fn(() => ref2CleanupFn);
+    const mergedRef = mergeRefs<string | null>(ref1, ref2);
+
+    const cleanup = mergedRef('value') as () => void;
+    expect(ref1.current).not.toBeNull();
+    expect(ref2CleanupFn).not.toHaveBeenCalled();
+
+    cleanup();
+    expect(ref1.current).toBeNull();
+    expect(ref2CleanupFn).toHaveBeenCalled();
+  });
 });
