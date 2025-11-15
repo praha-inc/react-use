@@ -1,5 +1,13 @@
 import type { Ref, RefCallback } from 'react';
 
+const setRef = <T>(ref: Ref<T>, value: T) => {
+  if (!ref) return;
+  if (typeof ref === 'function') {
+    return ref(value);
+  }
+  ref.current = value;
+};
+
 /**
  * Merges multiple React refs into a single ref callback.
  *
@@ -69,13 +77,15 @@ import type { Ref, RefCallback } from 'react';
  */
 export const mergeRefs = <T>(...refs: Ref<T>[]): RefCallback<T> => {
   return (value) => {
-    for (const ref of refs) {
-      if (!ref) continue;
-      if (typeof ref === 'function') {
-        ref(value);
-        continue;
-      }
-      ref.current = value;
-    }
+    const cleanups = refs.map((ref) => setRef(ref, value));
+    return () => {
+      cleanups.forEach((cleanup, index) => {
+        if (typeof cleanup === 'function') {
+          cleanup();
+        } else {
+          setRef(refs[index]!, null);
+        }
+      });
+    };
   };
 };
